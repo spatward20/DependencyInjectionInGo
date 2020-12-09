@@ -15,11 +15,11 @@ func main() {
 	}
 	p.PostPackage()
 
-	// NorthPolePostService := postalservice.NorthPolePostService{}
-	// p2 := Package{
-	// 	recipientCountry: "US",
-	// 	senderCountry:    "Canada",
-	// 	postalService:    NorthPolePostService,
-	// }
-	// p2.PostPackage()
+	NorthPolePostService := postalservice.NorthPolePostService{}
+	p2 := Package{
+		recipientCountry: "US",
+		senderCountry:    "Canada",
+		postalService:    NorthPolePostService,
+	}
+	p2.PostPackage()
 }

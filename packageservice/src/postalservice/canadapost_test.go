@@ -1,14 +1,36 @@
 package postalservice
 
 import (
+	"errors"
 	"testing"
 
-	"github.com/golang/mock/gomock"
+	"gopkg.in/go-playground/assert.v1"
 )
 
-func TestSend(t *testing.T) {
-	ctrl := gomock.NewController(t)
-	defer ctrl.Finish()
+func TestSendSuccess(t *testing.T) {
+	canadaPost := CanadaPostService{
+		Location: "Toronto",
+	}
 
-	
+	origin := "Toronto, Canada"
+	destination := "San Jose, California"
+
+	result, err := canadaPost.Send(origin, destination)
+
+	assert.Equal(t, result, "success")
+	assert.Equal(t, err, nil)
+}
+
+func TestSendFailure(t *testing.T) {
+	canadaPost := CanadaPostService{
+		Location: "Toronto",
+	}
+
+	origin := ""
+	destination := "San Jose, California"
+
+	result, err := canadaPost.Send(origin, destination)
+
+	assert.Equal(t, result, "")
+	assert.Equal(t, err, errors.New("Invalid parameters"))
 }

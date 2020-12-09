@@ -1,17 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Package struct {
 	recipientCountry string
 	senderCountry    string
-	postalService    postalservice.PostalService
 }
 
 func (p Package) PostPackage() error {
-	result, err := p.postalService.Send()
+
+	postalService := postalservice.CanadaPostService {}
+	if p.recipientCountry != "Canada" {
+		return errors.New("Sorry, We don't ship outside Canada")
+	}
+
+	result, err := postalService.Send()
+
 	if err != nil {
 		return fmt.Errorf("Effor: %+v", err)
 	}
+
 	return nil
 }
