@@ -21,7 +21,7 @@ func TestSendSuccess(t *testing.T) {
 	assert.Equal(t, err, nil)
 }
 
-func TestSendFailure(t *testing.T) {
+func TestCanadaPostSendFailure(t *testing.T) {
 	canadaPost := CanadaPostService{
 		Location: "Toronto",
 	}
@@ -33,4 +33,18 @@ func TestSendFailure(t *testing.T) {
 
 	assert.Equal(t, result, "")
 	assert.Equal(t, err, errors.New("Invalid parameters"))
+}
+
+func TestCanadaPostSendToNorthPoleFailure(t *testing.T) {
+	canadaPost := CanadaPostService{
+		Location: "Toronto",
+	}
+
+	origin := "Toronto"
+	destination := "North Pole"
+
+	result, err := canadaPost.Send(origin, destination)
+
+	assert.Equal(t, result, "")
+	assert.Equal(t, err, errors.New("Sorry, we don't ship to the North Pole"))
 }

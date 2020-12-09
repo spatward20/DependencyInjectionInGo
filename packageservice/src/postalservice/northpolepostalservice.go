@@ -6,6 +6,7 @@ import (
 )
 
 type NorthPolePostService struct {
+	Location string
 }
 
 func (np NorthPolePostService) Send(origin, destination string) (string, error) {

@@ -1,25 +1,21 @@
 package main
 
 import (
-	"postalservice"
+	"fmt"
+	"post"
 )
 
 func main() {
 
-	canadaPost := postalservice.CanadaPostService{}
-
-	p := Package{
-		recipientCountry: "US",
-		senderCountry:    "Canada",
-		postalService:    canadaPost,
+	p := post.Package{
+		DestinationCountry: "Toronto, Canada",
+		OriginCountry:      "Halifax, Canada",
 	}
-	p.PostPackage()
+	result, err := p.PostPackage()
 
-	NorthPolePostService := postalservice.NorthPolePostService{}
-	p2 := Package{
-		recipientCountry: "US",
-		senderCountry:    "Canada",
-		postalService:    NorthPolePostService,
+	if err != nil {
+		fmt.Println("Error: ", err)
 	}
-	p2.PostPackage()
+
+	fmt.Println(result)
 }
