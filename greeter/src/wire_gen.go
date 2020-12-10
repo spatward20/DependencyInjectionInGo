@@ -7,8 +7,8 @@ package main
 
 // Injectors from wire.go:
 
-func InitializeOrder() Order {
-	message := NewMessage()
+func InitializeOrder(msg string) Order {
+	message := NewMessage(msg)
 	cake := NewCake(message)
 	order := NewOrder(cake)
 	return order

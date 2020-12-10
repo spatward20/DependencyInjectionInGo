@@ -9,7 +9,7 @@ type Message string
 
 // NewMessage creates a default Message.
 func NewMessage() Message {
-	return Message("Happy Birthday")
+	return "Happy Birthday"
 }
 
 //A Cake
@@ -53,7 +53,7 @@ func main() {
 	// // place the order
 	// o := NewOrder(c)
 
-	o := InitializeOrder()
+	o := InitializeOrder("Happy Birthday to you!")
 
 	// process the order
 	o.Process()
