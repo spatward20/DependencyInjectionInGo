@@ -1,14 +1,16 @@
-package post
+package postalservice
 
 import (
 	"testing"
-
-	"github.com/golang/mock/gomock"
-	"gopkg.in/go-playground/assert.v1"
 )
 
 func TestSendPackage(t *testing.T) {
-	
-	canadaPostMock := 
+
+	p := Package{
+		DestinationCountry: "Canada",
+		OriginCountry:      "Canada",
+	}
+
+	p.PostPackage()
 
 }

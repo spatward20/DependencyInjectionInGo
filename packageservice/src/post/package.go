@@ -1,10 +1,11 @@
-package post
+package postalservice
 
 import (
 	"errors"
 	"fmt"
-	"postalservice"
 	"strings"
+
+	"../postalservice"
 )
 
 type Package struct {
