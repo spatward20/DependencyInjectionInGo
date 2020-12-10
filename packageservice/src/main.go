@@ -8,9 +8,10 @@ import (
 func main() {
 
 	p := post.Package{
-		DestinationCountry: "Toronto, Canada",
-		OriginCountry:      "Halifax, Canada",
+		Destination: "Toronto, Canada",
+		Origin:      "Halifax, Canada",
 	}
+
 	result, err := p.PostPackage()
 
 	if err != nil {

@@ -1,20 +1,16 @@
-package postalservice
+package post
 
 import (
 	"testing"
 
-	"../postalservice"
 	"gopkg.in/go-playground/assert.v1"
 )
 
 func TestSendPackageSuccess(t *testing.T) {
 
-	deliveryService := postalservice.CanadaPostService{}
-
 	p := Package{
-		DestinationCountry: "Canada",
-		OriginCountry:      "Canada",
-		DeliveryService:    deliveryService,
+		Destination: "Canada",
+		Origin:      "Canada",
 	}
 
 	result, err := p.PostPackage()
