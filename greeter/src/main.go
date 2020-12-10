@@ -1,83 +1,63 @@
-// Copyright 2018 The Wire Authors
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// The greeter binary simulates an event with greeters greeting guests.
 package main
 
 import (
-	"errors"
 	"fmt"
-	"os"
-	"time"
 )
 
-// Message is what greeters will use to greet guests.
-type Message string
-
-// NewMessage creates a default Message.
-func NewMessage(phrase string) Message {
-	return Message(phrase)
+//A Cake
+type Cake struct {
+	Message string
 }
 
-// NewGreeter initializes a Greeter. If the current epoch time is an even
-// number, NewGreeter will create a grumpy Greeter.
-func NewGreeter(m Message) Greeter {
-	var grumpy bool
-	if time.Now().Unix()%2 == 0 {
-		grumpy = true
-	}
-	return Greeter{Message: m, Grumpy: grumpy}
+// Cake constructor
+func NewCake(msg string) Cake {
+	return Cake{Message: msg}
 }
 
-// Greeter is the type charged with greeting guests.
-type Greeter struct {
-	Grumpy  bool
-	Message Message
+// Bake the Cake!
+func (c Cake) Bake() string {
+	return c.Message
 }
 
-// Greet produces a greeting for guests.
-func (g Greeter) Greet() Message {
-	if g.Grumpy {
-		return Message("Go away!")
-	}
-	return g.Message
+// A Person to place the order
+type Person struct {
+	Name  string
+	Email string
 }
 
-// NewEvent creates an event with the specified greeter.
-func NewEvent(g Greeter) (Event, error) {
-	if g.Grumpy {
-		return Event{}, errors.New("could not create event: event greeter is grumpy")
-	}
-	return Event{Greeter: g}, nil
+// Constructor for the person
+func NewPerson(name string, email string) Person {
+	return Person{Name: name, Email: email}
 }
 
-// Event is a gathering with greeters.
-type Event struct {
-	Greeter Greeter
+// Create an order for the cake
+func NewOrder(c Cake) Order {
+	return Order{Cake: c}
 }
 
-// Start ensures the event starts with greeting all guests.
-func (e Event) Start() {
-	msg := e.Greeter.Greet()
+// Order for a new cake
+type Order struct {
+	Person Person
+	Cake   Cake
+}
+
+// Process starts processing the order
+func (o Order) Process() {
+	msg := o.Cake.Bake()
 	fmt.Println(msg)
 }
 
 func main() {
-	e, err := InitializeEvent("hi there!")
-	if err != nil {
-		fmt.Printf("failed to create event: %s\n", err)
-		os.Exit(2)
-	}
-	e.Start()
+	// person walks into the store
+	p := Person{Name: "Harry Potter", Email: "hpotter@verticalscope.com"}
+
+	// select a cake
+	c := Cake{Message: "Happy Birthday!"}
+
+	// place the order
+	o := Order{Person: p, Cake: c}
+
+	// process the order
+	o.Process()
+
 }
