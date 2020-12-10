@@ -4,7 +4,7 @@ package main
 
 import "github.com/google/wire"
 
-func InitializeOrder(msg string) Order {
+func InitializeOrder() Order {
 	wire.Build(NewOrder, NewMessage, NewCake)
 	return Order{}
 }

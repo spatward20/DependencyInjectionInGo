@@ -53,7 +53,7 @@ func main() {
 	// // place the order
 	// o := NewOrder(c)
 
-	o := InitializeOrder("Happy Birthday to you!")
+	o := InitializeOrder()
 
 	// process the order
 	o.Process()
