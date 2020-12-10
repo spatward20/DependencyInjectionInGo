@@ -3,6 +3,7 @@ package postalservice
 import (
 	"errors"
 	"fmt"
+	"strings"
 )
 
 type CanadaPostService struct {
@@ -14,7 +15,7 @@ func (cp CanadaPostService) Send(origin, destination string) (string, error) {
 		return "", errors.New("Invalid parameters")
 	}
 
-	if destination == "North Pole" {
+	if strings.Contains(destination, "North Pole") {
 		return "", errors.New("Sorry, we don't ship to the North Pole")
 	}
 
