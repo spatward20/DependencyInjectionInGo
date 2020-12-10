@@ -4,30 +4,27 @@ import (
 	"fmt"
 )
 
+// Message to write on teh cake
+type Message string
+
+// NewMessage creates a default Message.
+func NewMessage() Message {
+	return Message("Happy Birthday")
+}
+
 //A Cake
 type Cake struct {
-	Message string
+	Message Message
 }
 
 // Cake constructor
-func NewCake(msg string) Cake {
+func NewCake(msg Message) Cake {
 	return Cake{Message: msg}
 }
 
 // Bake the Cake!
-func (c Cake) Bake() string {
+func (c Cake) Bake() Message {
 	return c.Message
-}
-
-// A Person to place the order
-type Person struct {
-	Name  string
-	Email string
-}
-
-// Constructor for the person
-func NewPerson(name string, email string) Person {
-	return Person{Name: name, Email: email}
 }
 
 // Create an order for the cake
@@ -37,8 +34,7 @@ func NewOrder(c Cake) Order {
 
 // Order for a new cake
 type Order struct {
-	Person Person
-	Cake   Cake
+	Cake Cake
 }
 
 // Process starts processing the order
@@ -48,14 +44,16 @@ func (o Order) Process() {
 }
 
 func main() {
-	// person walks into the store
-	p := Person{Name: "Harry Potter", Email: "hpotter@verticalscope.com"}
+	// // person walks into the store
+	// p := NewMessage()
 
-	// select a cake
-	c := Cake{Message: "Happy Birthday!"}
+	// // select a cake
+	// c := NewCake(p)
 
-	// place the order
-	o := Order{Person: p, Cake: c}
+	// // place the order
+	// o := NewOrder(c)
+
+	o := InitializeOrder()
 
 	// process the order
 	o.Process()
