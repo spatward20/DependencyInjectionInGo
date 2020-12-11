@@ -8,9 +8,14 @@ import (
 
 func TestSendPackageSuccess(t *testing.T) {
 
+	deliveryService := postalservice.CanadaPostService{
+		Location: "Toronto",
+	}
+
 	p := Package{
-		Destination: "Canada",
-		Origin:      "Canada",
+		Destination:     "Canada",
+		Origin:          "Canada",
+		DeliveryService: deliveryService,
 	}
 
 	result, err := p.PostPackage()

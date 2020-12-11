@@ -3,13 +3,19 @@ package main
 import (
 	"fmt"
 	"post"
+	"postalservice"
 )
 
 func main() {
 
+	deliveryService := postalservice.NorthPolePostService{
+		Location: "North Branch",
+	}
+
 	p := post.Package{
-		Destination: "Toronto, Canada",
-		Origin:      "Halifax, Canada",
+		Destination:     "North Pole",
+		Origin:          "Halifax, Canada",
+		DeliveryService: deliveryService,
 	}
 
 	result, err := p.PostPackage()

@@ -3,21 +3,18 @@ package post
 import (
 	"fmt"
 
-	"../postalservice"
+	"postalservice"
 )
 
 type Package struct {
-	Origin      string
-	Destination string
+	Origin          string
+	Destination     string
+	DeliveryService postalservice.PostalService
 }
 
 func (p Package) PostPackage() (string, error) {
 
-	postalService := postalservice.CanadaPostService{
-		Location: "Toronto",
-	}
-
-	result, err := postalService.Send(p.Origin, p.Destination)
+	result, err := p.DeliveryService.Send(p.Origin, p.Destination)
 
 	if err != nil {
 		return "", fmt.Errorf("%+v", err)
